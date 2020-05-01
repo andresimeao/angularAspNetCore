@@ -1,0 +1,64 @@
+<div class="row align-items-center my-5">
+  <div class="col-lg-5">
+      <h1 class="font-weight-light">Cadastro</h1>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <div>
+              <label for="Nome">*Nome</label>
+              <input class="form-control" formControlName="name" [ngClass]="{'is-invalid': submit && f.name.invalid }"
+              placeholder="Ex: TV" type="text">
+              <div *ngIf="submit && f.name.errors" class="invalid-feedback">
+                  <div *ngIf="f.name.errors.required">nome obrigatório</div>
+              </div>
+          </div>
+
+          <div>
+              <label for="valor">*Valor: R$</label>
+              <input placeholder="Ex: 50" formControlName="value"
+              [ngClass]="{'is-invalid': submit && f.value?.invalid }" class="form-control" type="number">
+              <div *ngIf="submit && f.value.errors" class="invalid-feedback">
+                  <div *ngIf="f.value.errors.required">valor obrigatório</div>
+              </div>
+          </div>
+          <div>
+              <label for='foto'>Foto:</label>
+              <input type="file" placeholder="imag.jpeg"
+              (change)="onSelectFile($event)" class='form-control file'>
+              <div *ngIf="this.validateFile" class="invalid-feedback">
+                  <div *ngIf="this.validateFile">Permitido somentes imagens no formato: JPEG e PNG</div>
+              </div>
+          </div>
+          <div>
+              <button class="btn btn-primary btn-lg btn-block btn-style">cadastrar</button>
+          </div>
+      </form>
+  </div>
+
+
+  <div class="col-lg-7">
+     <img class="img-fluid rounded mb-4 mb-lg-0" *ngIf="this.base64"[src]="this.base64" alt="">
+      <img class="img-fluid rounded mb-4 mb-lg-0" *ngIf="!this.base64" src="../../assets/semImagem.jpeg" alt="">
+  </div>
+  </div>
+
+<div>
+
+  <table class="table">
+    <tr>
+      <th>Nome</th>
+      <th>valor</th>
+      <th>Imagem</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td>{{product.name}}</td>
+      <td>{{product.value | currency: 'R$'}}</td>
+      <td >
+        <img *ngIf="!product.image_patch" src="https://localhost:5001/imagem/{{product.id}}" class="img-thumbnail rounded-sm">
+      </td>
+      <td><button type="button" class="btn btn-info" routerLink="../update/{{product.id}}">Edidar</button></td>
+      <td><button type="button" class="btn btn-danger" (click)="onDelete(product.id)">Excluir</button></td>
+    </tr>
+  </table>
+</div>
+

@@ -1,0 +1,24 @@
+<body class="text-center">
+  <form class="form-signin" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <h1 class="h3 mb-3 font-weight-normal">Seja bem vindo, faça login por favor.</h1>
+
+    <label for="inputEmail" class="sr-only">Nome de Usuário</label>
+    <input formControlName="username" type="text" name="username" id="username" class="form-control"
+     placeholder="Nome de usuário" [ngClass]="{ 'is-invalid': submit && (controls.username.touched && controls.username.invalid) }">
+     <div *ngIf="submit && controls.username.errors" class="invalid-feedback">
+      <div *ngIf="controls.username.errors.required">Campo Obrigatóro !</div>
+     </div>
+
+
+    <label for="inputPassword" class="sr-only">Senha</label>
+    <input formControlName="password" name="password" id="password" type="password"  class="form-control" placeholder="Senha"
+    [ngClass]="{ 'is-invalid': submit && (controls.password.touched && controls.password.invalid) }">
+    <div *ngIf="submit && controls.password.errors" class="invalid-feedback">
+      <div *ngIf="controls.password.errors.required">Campo Obrigatóro !</div>
+     </div>
+    <button class="btn btn-lg btn-primary btn-block">Entrar</button>
+    <p class="mt-5 mb-3 text-muted">&copy; André Simeão Ferreira 2020</p>
+
+  </form>
+</body>

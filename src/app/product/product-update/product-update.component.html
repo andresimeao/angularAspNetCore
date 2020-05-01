@@ -1,0 +1,54 @@
+<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <label for="Name">Nome</label>
+  <input formControlName="name" type="text" name="name" id="name">
+
+  <label for="Name">Valor</label>
+  <input  formControlName="value" type="number" name="value" id="value">
+
+  <label for="Name">Imagem</label>
+  <input type="file" (change)="onSelectFile($event)" name="image" id="image">
+  <button>Enviar</button>
+  <img src="https://localhost:5001/imagem/{{control.id.value}}">
+</form> -->
+
+
+<div class="row align-items-center my-5">
+  <div class="col-lg-5">
+      <h1 class="font-weight-light">Cadastro</h1>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <div>
+              <label for="Nome">*Nome</label>
+              <input class="form-control" formControlName="name" [ngClass]="{'is-invalid': submit && f.name.invalid }"
+              placeholder="Ex: TV" type="text">
+              <div *ngIf="submit && f.name.errors" class="invalid-feedback">
+                  <div *ngIf="f.name.errors.required">nome obrigatório</div>
+              </div>
+          </div>
+
+          <div>
+              <label for="valor">*Valor: R$</label>
+              <input placeholder="Ex: 50" formControlName="value"
+              [ngClass]="{'is-invalid': submit && f.value?.invalid }" class="form-control" type="number">
+              <div *ngIf="submit && f.value.errors" class="invalid-feedback">
+                  <div *ngIf="f.value.errors.required">valor obrigatório</div>
+              </div>
+          </div>
+          <div>
+              <label for='foto'>Foto:</label>
+              <input type="file" placeholder="imag.jpeg"
+              (change)="onSelectFile($event)" class='form-control file'>
+          </div>
+          <div>
+              <button class="btn btn-primary btn-lg btn-block btn-style">Alterar</button>
+            </div>
+        </form>
+        <button [routerLink]="['../../product']" class="btn btn-warning btn-lg btn-block btn-style">Voltar</button>
+  </div>
+
+
+  <div class="col-lg-7">
+     <img class="img-fluid rounded mb-4 mb-lg-0" *ngIf="this.base64"[src]="this.base64" alt="">
+      <img class="img-fluid rounded mb-4 mb-lg-0" *ngIf="!this.base64" src="https://localhost:5001/imagem/{{this.id}}" alt="">
+  </div>
+  </div>
+

@@ -1,0 +1,9 @@
+.img-thumbnail {
+  max-width:175px;
+  max-height:125px;
+  width: auto;
+  height: auto;
+}
+button{
+  margin-top: 5px;
+}
